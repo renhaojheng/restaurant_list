@@ -12,16 +12,15 @@ db.on('error', () => {
 db.once('open', () => {
   console.log('mongodb connected!')
   restaurantList.results.forEach(item => {
-    Restaurant.create({ 
-      name: item.name, 
-      name_en: item.name_en,
+    Restaurant.create({
+      name: item.name,
       category: item.category,
       image: item.image,
       location: item.location,
       phone: item.phone,
       google_map: item.google_map,
       rating: item.rating,
-      description: item.description  
+      description: item.description
     })
   })
   console.log('done.')

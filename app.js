@@ -30,6 +30,36 @@ app.set('view engine', 'handlebars')
 app.use(express.urlencoded({ extended: true }))
 
 // 設定路由
+// 新增餐廳資訊頁面
+app.get('/restaurants/new', (req, res) => {
+  res.render('new')
+})
+// 新增餐廳資訊
+app.post('/restaurants', (req, res) => {
+  const item = {
+    name: req.body.name,
+    category: req.body.category,
+    image: req.body.image,
+    location: req.body.location,
+    phone: req.body.phone,
+    google_map: req.body.google_map,
+    rating: req.body.rating,
+    description: req.body.description
+  }
+  return Restaurant.create({
+    name: item.name,
+    category: item.category,
+    image: item.image,
+    location: item.location,
+    phone: item.phone,
+    google_map: item.google_map,
+    rating: item.rating,
+    description: item.description
+  })
+    .then(() => res.redirect('/')) // 新增完成後導回首頁
+    .catch(error => console.log(error))
+})
+
 // 載入主頁
 app.get('/', (req, res) => {
   Restaurant.find()
