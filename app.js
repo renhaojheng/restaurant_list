@@ -42,6 +42,14 @@ app.get('/restaurants/:id', (req, res) => {
     .catch(error => console.error(error))
 })
 
+app.get('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('edit', { restaurant }))
+    .catch(error => console.error(error))
+})
+
 // 啟動並監聽伺服器
 app.listen(port, () => {
   console.log(`App is running on http://localhost:${port}`)
