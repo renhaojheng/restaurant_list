@@ -26,6 +26,9 @@ db.once('open', () => {
 app.engine('handlebars', exphbs.engine({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
+// 設定body-parser
+app.use(express.urlencoded({ extended: true }))
+
 // 設定路由
 app.get('/', (req, res) => {
   Restaurant.find()
@@ -48,6 +51,34 @@ app.get('/restaurants/:id/edit', (req, res) => {
     .lean()
     .then(restaurant => res.render('edit', { restaurant }))
     .catch(error => console.error(error))
+})
+
+app.post('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  const item = {
+    name: req.body.name,
+    category: req.body.category,
+    image: req.body.image,
+    location: req.body.location,
+    phone: req.body.phone,
+    google_map: req.body.google_map,
+    rating: req.body.rating,
+    description: req.body.description
+  }
+  return Restaurant.findById(id)
+    .then(restaurant => {
+      restaurant.name = item.name
+      restaurant.category = item.category
+      restaurant.image = item.image
+      restaurant.location = item.location
+      restaurant.phone = item.phone
+      restaurant.google_map = item.google_map
+      restaurant.rating = item.rating
+      restaurant.description = item.description
+      return restaurant.save()
+    })
+    .then(() => res.redirect(`/restaurants/${id}`))
+    .catch(error => console.log(error))
 })
 
 // 啟動並監聽伺服器
