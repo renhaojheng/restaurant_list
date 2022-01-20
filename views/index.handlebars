@@ -1,0 +1,52 @@
+<!-- search bar -->
+<div class="container search-bar mx-auto my-4" style="max-width: 680px">
+  <div class="search-bar-outer">
+    <div class="search-bar-inner">
+      <form action="/search">
+        <div class="input-group">
+          <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
+            value="{{keyword}}" aria-describedby="search-button">
+          <div class="input-group-append mx-2">
+            <button class="btn btn-major" type="submit" id="search-button"
+              style="color:#ffffff; background-color:#4592af"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- restaurant list -->
+<div class="container mt-5">
+  <div class="row">
+    {{!-- each 迴圈呈現餐廳清單 --}}
+    {{#each restaurants}}
+    <div class="col-3">
+      <div class="mb-2">
+        <div class="card">
+          <img class="card-img-top" src="{{this.image}}" style="height: 180px" alt="{{this.name}}">
+          <div class="card-body p-3">
+            <h6 class="card-title mb-1">{{this.name}}</h6>
+            <div class="restaurant-category mb-1">
+              <i class="fas fa-utensils pr-2"></i> {{this.category}}
+            </div>
+            <span class="badge bg-danger font-weight-normal">
+              {{this.rating}}
+              <i class="fas fa-star fa-xs"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end">
+        <a type="button" class="btn border btn btn-light mx-1 mb-2" href="./restaurants/{{this._id}}" role="button"
+          style="text-decoration:none">Detail</a>
+        <a type="button" class="btn border btn btn-light mx-1 mb-2" href="./restaurants/{{this._id}}/edit" role="button"
+          style="text-decoration:none">Edit</a>
+        <form class="d-inline" action="./restaurants/{{this._id}}/delete" method="post">
+          <button type="submit" class="btn border btn btn-light ms-1 mb-2" role="button">Delete</button>
+        </form>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>
