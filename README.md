@@ -33,4 +33,6 @@ App is running on http://localhost:3000
 - Express 4.17.2
 - Express-Handlebars 6.0.2
 - Bootstrap 5.1.3
+- Font-awesome 5.15.4 
+- MongoDB
 - mongoose 6.1.6
