@@ -36,26 +36,7 @@ app.get('/restaurants/new', (req, res) => {
 })
 // 新增餐廳資訊
 app.post('/restaurants', (req, res) => {
-  const item = {
-    name: req.body.name,
-    category: req.body.category,
-    image: req.body.image,
-    location: req.body.location,
-    phone: req.body.phone,
-    google_map: req.body.google_map,
-    rating: req.body.rating,
-    description: req.body.description
-  }
-  return Restaurant.create({
-    name: item.name,
-    category: item.category,
-    image: item.image,
-    location: item.location,
-    phone: item.phone,
-    google_map: item.google_map,
-    rating: item.rating,
-    description: item.description
-  })
+  return Restaurant.create(req.body)
     .then(() => res.redirect('/')) // 新增完成後導回首頁
     .catch(error => console.log(error))
 })
@@ -86,28 +67,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
 // 編輯餐廳詳細資訊
 app.post('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
-  const item = {
-    name: req.body.name,
-    category: req.body.category,
-    image: req.body.image,
-    location: req.body.location,
-    phone: req.body.phone,
-    google_map: req.body.google_map,
-    rating: req.body.rating,
-    description: req.body.description
-  }
-  return Restaurant.findById(id)
-    .then(restaurant => {
-      restaurant.name = item.name
-      restaurant.category = item.category
-      restaurant.image = item.image
-      restaurant.location = item.location
-      restaurant.phone = item.phone
-      restaurant.google_map = item.google_map
-      restaurant.rating = item.rating
-      restaurant.description = item.description
-      return restaurant.save()
-    })
+  return Restaurant.findByIdAndUpdate(id, req.body)
     .then(() => res.redirect(`/restaurants/${id}`))
     .catch(error => console.log(error))
 })
