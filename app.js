@@ -2,26 +2,13 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
-const mongoose = require('mongoose')
+
+require('./config/mongoose')
 const routes = require("./routes")
 
 const app = express()
 // 設定連接阜號
 const port = 3000
-
-// 連結資料庫
-mongoose.connect('mongodb://localhost/restaurant_list')
-
-// 檢視與資料庫的連線狀態
-const db = mongoose.connection
-
-db.on('error', () => {
-  console.log('mongodb error!')
-})
-
-db.once('open', () => {
-  console.log('mongodb connected!')
-})
 
 // 設定樣板引擎
 app.engine('handlebars', exphbs.engine({ defaultLayout: 'main' }))
