@@ -9,8 +9,6 @@
           <div class="input-group-append mx-2">
             <button class="btn btn-major" type="submit" id="search-button"
               style="color:#ffffff; background-color:#4592af"><i class="fas fa-search"></i></button>
-            <a type="button" class="btn btn-major" href="./restaurants/new"
-              style="color:#ffffff; background-color:#4592af">Add</a>
           </div>
         </div>
       </form>
@@ -44,7 +42,7 @@
           style="text-decoration:none">Detail</a>
         <a type="button" class="btn border btn btn-light mx-1 mb-2" href="./restaurants/{{this._id}}/edit"
           style="text-decoration:none">Edit</a>
-        <form class="d-inline" action="./restaurants/{{this._id}}/delete" method="post">
+        <form class="d-inline" action="./restaurants/{{this._id}}?_method=DELETE" method="post">
           <button type="submit" class="btn border btn btn-light ms-1 mb-2">Delete</button>
         </form>
       </div>

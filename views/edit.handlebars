@@ -1,5 +1,5 @@
 <div class="card border mx-auto my-2" style="width: 40rem;">
-  <form action="/restaurants/{{restaurant._id}}/edit" class="m-2" method="post">
+  <form action="/restaurants/{{restaurant._id}}?_method=PUT" class="m-2" method="post">
     <div class="mb-3">
       <label for="name" class="form-labe fw-bolderl">Name</label>
       <input type="text" class="form-control" id="name" name="name" value="{{restaurant.name}}">

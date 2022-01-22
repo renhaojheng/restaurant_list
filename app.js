@@ -1,10 +1,11 @@
 // 引入套件
 const express = require('express')
-const app = express()
 const exphbs = require('express-handlebars')
+const methodOverride = require('method-override')
 const mongoose = require('mongoose')
 const Restaurant = require('./models/restaurant.js')
 
+const app = express()
 // 設定連接阜號
 const port = 3000
 
@@ -28,6 +29,8 @@ app.set('view engine', 'handlebars')
 
 // 設定body-parser
 app.use(express.urlencoded({ extended: true }))
+// 設定method-override
+app.use(methodOverride("_method"))
 
 // 設定路由
 // 新增餐廳資訊頁面
@@ -65,14 +68,14 @@ app.get('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.error(error))
 })
 // 編輯餐廳詳細資訊
-app.post('/restaurants/:id/edit', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findByIdAndUpdate(id, req.body)
     .then(() => res.redirect(`/restaurants/${id}`))
     .catch(error => console.log(error))
 })
 // 刪除餐廳資訊
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurant => {
