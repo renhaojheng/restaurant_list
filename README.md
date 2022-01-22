@@ -36,3 +36,4 @@ App is running on http://localhost:3000
 - Font-awesome 5.15.4 
 - MongoDB
 - mongoose 6.1.6
+- Method-override 3.0.0
