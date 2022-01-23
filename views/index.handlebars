@@ -1,8 +1,8 @@
 <!-- search bar -->
-<div class="container search-bar mx-auto my-4" style="max-width: 680px">
+<div class="container search-bar mx-auto my-4" style="max-width: 70rem">
   <div class="search-bar-outer">
-    <div class="search-bar-inner">
-      <form action="/search">
+    <div class="search-bar-inner row d-flex justify-content-between">
+      <form action="/search" class="col-3">
         <div class="input-group">
           <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
             value="{{keyword}}" aria-describedby="search-button">
@@ -12,6 +12,17 @@
           </div>
         </div>
       </form>
+      <div class="dropdown col-3 d-flex justify-content-end">
+        <form action="/">
+          <select class="btn border dropdown-toggle" id="sort" name="sort">
+            <option value="0">A to Z</option>
+            <option value="1">Z to A</option>
+            <option value="2">類別</option>
+            <option value="3">地區</option>
+          </select>
+          <button class="btn btn-major" type="submit" style="color:#ffffff; background-color:#4592af">Start</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
