@@ -4,6 +4,7 @@ const router = express.Router()
 
 // 載入主頁
 router.get('/', (req, res) => {
+  // 餐廳排序依據
   const sort = Number(req.query.sort)
   let sortBy = {}
   if (sort === 0) {
